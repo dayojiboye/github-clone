@@ -1,32 +1,44 @@
+import { AnimatedTabBar } from "@/components/animated-tab-bar";
+import { TabBarScrollProvider } from "@/providers/tab-bar-scroll-provider";
+import { Octicons } from "@expo/vector-icons";
 import { Tabs } from "expo-router";
 import React from "react";
 
-import { HapticTab } from "@/components/haptic-tab";
-import Icon from "react-native-remix-icon";
-import { useUniwind } from "uniwind";
-
 export default function TabLayout() {
-	const { theme } = useUniwind();
-
 	return (
-		<Tabs
-			screenOptions={{
-				tabBarStyle: {
-					borderTopWidth: 1,
-					borderTopColor: theme === "dark" ? "#111" : "#ccc",
-					backgroundColor: theme === "dark" ? "#000" : "#fff",
-				},
-				headerShown: false,
-				tabBarButton: HapticTab,
-			}}
-		>
-			<Tabs.Screen
-				name="index"
-				options={{
-					title: "Home",
-					tabBarIcon: ({ color }) => <Icon size={28} name="home-4-line" color={color} />,
-				}}
-			/>
-		</Tabs>
+		<TabBarScrollProvider>
+			<Tabs tabBar={(props) => <AnimatedTabBar {...props} />}>
+				<Tabs.Screen
+					name="index"
+					options={{
+						title: "Home",
+						tabBarIcon: ({ color, size }) => <Octicons size={size} name="home" color={color} />,
+					}}
+				/>
+				<Tabs.Screen
+					name="inbox"
+					options={{
+						title: "Inbox",
+						tabBarIcon: ({ color, size }) => <Octicons size={size} name="inbox" color={color} />,
+					}}
+				/>
+				<Tabs.Screen
+					name="explore"
+					options={{
+						title: "Explore",
+						tabBarIcon: ({ color, size }) => (
+							<Octicons size={size} name="telescope" color={color} />
+						),
+					}}
+				/>
+				<Tabs.Screen
+					name="profile"
+					options={{
+						title: "Profile",
+						tabBarIcon: ({ color, size }) => <Octicons size={size} name="person" color={color} />,
+					}}
+				/>
+			</Tabs>
+		</TabBarScrollProvider>
 	);
 }
