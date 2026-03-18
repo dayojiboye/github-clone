@@ -32,7 +32,7 @@
 	:root {
 		@variant light {
 			/* Base Colors */
-			--background: #eff0f5;
+			--background: #f4f7fe;
 			--foreground: var(--eclipse);
 
 			/* Surface: Used for non-overlay components (cards, accordions, disclosure groups) */

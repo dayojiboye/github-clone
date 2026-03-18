@@ -5,7 +5,7 @@ import { ComponentProps } from "react";
 type TabStackLayoutProps = ComponentProps<typeof Stack>;
 
 export default function TabStackLayout({ screenOptions, ...rest }: TabStackLayoutProps) {
-	const { background, foreground, accent } = useThemeColors();
+	const { foreground, accent } = useThemeColors();
 
 	return (
 		<Stack
@@ -13,9 +13,9 @@ export default function TabStackLayout({ screenOptions, ...rest }: TabStackLayou
 			screenOptions={{
 				headerLargeTitle: true,
 				headerTransparent: true,
-				headerBlurEffect: "light",
+				headerBlurEffect: "regular",
 				headerLargeTitleShadowVisible: true,
-				headerStyle: { backgroundColor: background },
+				// headerStyle: { backgroundColor: background },
 				headerLargeTitleStyle: { color: foreground },
 				headerTitleStyle: { color: foreground },
 				headerTintColor: accent,

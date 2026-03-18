@@ -33,7 +33,7 @@ export default function AnimatedHeaderScreen({
 				options={{
 					title: title ?? "",
 					headerSearchBarOptions: {
-						placeholder: "Search",
+						placeholder: "Search GitHub",
 						tintColor: accent,
 						textColor: foreground,
 						headerIconColor: muted,
@@ -60,7 +60,7 @@ export default function AnimatedHeaderScreen({
 			<ScrollView
 				contentInsetAdjustmentBehavior="automatic"
 				style={{ flex: 1, backgroundColor: background }}
-				contentContainerStyle={{ paddingBottom: 200 }}
+				contentContainerStyle={{ paddingBottom: 100 }}
 			>
 				<View style={{ paddingHorizontal: 16 }}>{children}</View>
 			</ScrollView>
