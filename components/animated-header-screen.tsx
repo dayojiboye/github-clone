@@ -1,8 +1,8 @@
 import { Octicons } from "@expo/vector-icons";
 import { Stack } from "expo-router";
+import { useThemeColor } from "heroui-native";
 import React, { ReactNode } from "react";
 import { Pressable, ScrollView, View } from "react-native";
-import { useThemeColors } from "../hooks/use-theme-colors";
 
 type AnimatedHeaderScreenProps = {
 	children: ReactNode;
@@ -25,7 +25,9 @@ export default function AnimatedHeaderScreen({
 	leftIcon,
 	rightIcon,
 }: AnimatedHeaderScreenProps) {
-	const { accent, foreground, muted } = useThemeColors();
+	const accent = useThemeColor("accent");
+	const foreground = useThemeColor("foreground");
+	const muted = useThemeColor("muted");
 
 	return (
 		<>
@@ -60,7 +62,7 @@ export default function AnimatedHeaderScreen({
 			<ScrollView
 				contentInsetAdjustmentBehavior="automatic"
 				className="flex-1 bg-background"
-				contentContainerClassName="pb-[100px]"
+				contentContainerClassName="pb-[100px] pt-2"
 			>
 				<View className="px-4">{children}</View>
 			</ScrollView>

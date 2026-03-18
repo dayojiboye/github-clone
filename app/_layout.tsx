@@ -3,6 +3,8 @@ import { StatusBar } from "expo-status-bar";
 import { HeroUINativeProvider } from "heroui-native/provider";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import "react-native-reanimated";
+import { SafeAreaListener } from "react-native-safe-area-context";
+import { Uniwind } from "uniwind";
 import "../global.css";
 
 export const unstable_settings = {
@@ -12,12 +14,18 @@ export const unstable_settings = {
 export default function RootLayout() {
 	return (
 		<GestureHandlerRootView style={{ flex: 1 }}>
-			<HeroUINativeProvider>
-				<Stack>
-					<Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-				</Stack>
-				<StatusBar style="auto" />
-			</HeroUINativeProvider>
+			<SafeAreaListener
+				onChange={({ insets }) => {
+					Uniwind.updateInsets(insets);
+				}}
+			>
+				<HeroUINativeProvider>
+					<Stack>
+						<Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+					</Stack>
+					<StatusBar style="auto" />
+				</HeroUINativeProvider>
+			</SafeAreaListener>
 		</GestureHandlerRootView>
 	);
 }

@@ -1,11 +1,13 @@
-import { useThemeColors } from "@/hooks/use-theme-colors";
 import { Stack } from "expo-router";
+import { useThemeColor } from "heroui-native";
 import { ComponentProps } from "react";
 
 type TabStackLayoutProps = ComponentProps<typeof Stack>;
 
 export default function TabStackLayout({ screenOptions, ...rest }: TabStackLayoutProps) {
-	const { foreground, accent, background } = useThemeColors();
+	const foreground = useThemeColor("foreground");
+	const accent = useThemeColor("accent");
+	const background = useThemeColor("background");
 
 	return (
 		<Stack
