@@ -25,7 +25,7 @@ export default function AnimatedHeaderScreen({
 	leftIcon,
 	rightIcon,
 }: AnimatedHeaderScreenProps) {
-	const { background, accent, foreground, muted } = useThemeColors();
+	const { accent, foreground, muted } = useThemeColors();
 
 	return (
 		<>
@@ -42,14 +42,14 @@ export default function AnimatedHeaderScreen({
 					},
 					headerLeft: leftIcon
 						? () => (
-								<Pressable onPress={leftIcon.onPress} style={{ marginLeft: 4 }}>
+								<Pressable onPress={leftIcon.onPress}>
 									<Octicons name={leftIcon.name} size={24} color={accent} />
 								</Pressable>
 							)
 						: undefined,
 					headerRight: rightIcon
 						? () => (
-								<Pressable onPress={rightIcon.onPress} style={{ marginRight: 4 }}>
+								<Pressable onPress={rightIcon.onPress}>
 									<Octicons name={rightIcon.name} size={24} color={accent} />
 								</Pressable>
 							)
@@ -59,10 +59,10 @@ export default function AnimatedHeaderScreen({
 
 			<ScrollView
 				contentInsetAdjustmentBehavior="automatic"
-				style={{ flex: 1, backgroundColor: background }}
-				contentContainerStyle={{ paddingBottom: 100 }}
+				className="flex-1 bg-background"
+				contentContainerClassName="pb-[100px]"
 			>
-				<View style={{ paddingHorizontal: 16 }}>{children}</View>
+				<View className="px-4">{children}</View>
 			</ScrollView>
 		</>
 	);
