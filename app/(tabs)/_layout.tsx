@@ -1,29 +1,38 @@
-import { AnimatedTabBar } from "@/components/animated-tab-bar";
 import { TabBarScrollProvider } from "@/providers/tab-bar-scroll-provider";
 import { Octicons } from "@expo/vector-icons";
+import { BlurView } from "expo-blur";
 import { Tabs } from "expo-router";
 import React from "react";
+import { StyleSheet } from "react-native";
 
 export default function TabLayout() {
 	return (
 		<TabBarScrollProvider>
-			<Tabs tabBar={(props) => <AnimatedTabBar {...props} />}>
+			<Tabs
+				screenOptions={{
+					headerShown: false,
+					tabBarStyle: { position: "absolute", borderTopWidth: 0, elevation: 0 },
+					tabBarBackground: () => (
+						<BlurView intensity={95} tint="systemMaterial" style={StyleSheet.absoluteFill} />
+					),
+				}}
+			>
 				<Tabs.Screen
-					name="index"
+					name="(home)"
 					options={{
 						title: "Home",
 						tabBarIcon: ({ color, size }) => <Octicons size={size} name="home" color={color} />,
 					}}
 				/>
 				<Tabs.Screen
-					name="inbox"
+					name="(inbox)"
 					options={{
 						title: "Inbox",
 						tabBarIcon: ({ color, size }) => <Octicons size={size} name="inbox" color={color} />,
 					}}
 				/>
 				<Tabs.Screen
-					name="explore"
+					name="(explore)"
 					options={{
 						title: "Explore",
 						tabBarIcon: ({ color, size }) => (
@@ -32,7 +41,7 @@ export default function TabLayout() {
 					}}
 				/>
 				<Tabs.Screen
-					name="profile"
+					name="(profile)"
 					options={{
 						title: "Profile",
 						tabBarIcon: ({ color, size }) => <Octicons size={size} name="person" color={color} />,

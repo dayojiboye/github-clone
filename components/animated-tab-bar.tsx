@@ -1,4 +1,5 @@
 import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
+import { BlurView } from "expo-blur";
 import { cn } from "heroui-native";
 import React, { useEffect } from "react";
 import { Animated, Pressable, StyleSheet, Text } from "react-native";
@@ -9,36 +10,45 @@ import { useTabBarScroll } from "../providers/tab-bar-scroll-provider";
 export function AnimatedTabBar({ state, descriptors, navigation }: BottomTabBarProps) {
 	const insets = useSafeAreaInsets();
 	const { scrollY } = useTabBarScroll();
-	const { background, surface, border, accent, muted } = useThemeColors();
+	const { border, accent, muted } = useThemeColors();
 
+	// Reset scroll on tab change
 	useEffect(() => {
 		scrollY.setValue(0);
 	}, [state.index]);
 
+	// Border fades out as user scrolls down (content blends with tab bar)
 	const borderTopOpacity = scrollY.interpolate({
-		inputRange: [0, 40],
+		inputRange: [0, 60],
 		outputRange: [1, 0],
 		extrapolate: "clamp",
 	});
 
-	const backgroundColor = scrollY.interpolate({
+	// Blur intensity: light at top, stronger as content scrolls under
+	const blurIntensity = scrollY.interpolate({
 		inputRange: [0, 60],
-		outputRange: [surface, background] as string[],
+		outputRange: [60, 95],
 		extrapolate: "clamp",
 	});
 
 	return (
-		<Animated.View
-			style={[{ paddingBottom: insets.bottom, backgroundColor }]}
-			className="flex-row pt-2"
-		>
+		<Animated.View style={[styles.container, { paddingBottom: insets.bottom }]}>
+			{/* Blur background */}
+			<AnimatedBlurView
+				intensity={blurIntensity}
+				tint="systemMaterial"
+				style={StyleSheet.absoluteFill}
+			/>
+
+			{/* Border top fades out on scroll */}
 			<Animated.View
-				className="absolute top-0 left-0 right-0"
-				style={{
-					height: StyleSheet.hairlineWidth,
-					backgroundColor: border as string,
-					opacity: borderTopOpacity,
-				}}
+				style={[
+					styles.border,
+					{
+						backgroundColor: border as string,
+						opacity: borderTopOpacity,
+					},
+				]}
 			/>
 
 			{state.routes.map((route, index) => {
@@ -57,11 +67,7 @@ export function AnimatedTabBar({ state, descriptors, navigation }: BottomTabBarP
 				};
 
 				return (
-					<Pressable
-						key={route.key}
-						onPress={onPress}
-						className="flex-1 items-center justify-center py-1 gap-1"
-					>
+					<Pressable key={route.key} onPress={onPress} style={styles.tab}>
 						{options.tabBarIcon?.({
 							focused: isFocused,
 							color: isFocused ? accent : muted,
@@ -76,3 +82,31 @@ export function AnimatedTabBar({ state, descriptors, navigation }: BottomTabBarP
 		</Animated.View>
 	);
 }
+
+// Wrap BlurView to make intensity animatable
+const AnimatedBlurView = Animated.createAnimatedComponent(BlurView);
+
+const styles = StyleSheet.create({
+	container: {
+		flexDirection: "row",
+		paddingTop: 8,
+		position: "absolute",
+		bottom: 0,
+		left: 0,
+		right: 0,
+	},
+	border: {
+		position: "absolute",
+		top: 0,
+		left: 0,
+		right: 0,
+		height: StyleSheet.hairlineWidth,
+	},
+	tab: {
+		flex: 1,
+		alignItems: "center",
+		justifyContent: "center",
+		paddingVertical: 4,
+		gap: 4,
+	},
+});
