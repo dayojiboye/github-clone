@@ -5,7 +5,7 @@ import { SectionHeader } from "./section-header";
 
 export function MyWork() {
 	return (
-		<View className="gap-1.5">
+		<View className="gap-2">
 			<SectionHeader title="My Work" />
 			<Surface className="rounded-[10px] px-0 gap-3.5 py-3 shadow-none">
 				<WorkTile title="Issues" />
@@ -20,7 +20,7 @@ export function MyWork() {
 	);
 }
 
-export function WorkTile({
+function WorkTile({
 	title,
 	iconName = "issue-opened",
 	iconColor = "#69cd67",
@@ -42,7 +42,7 @@ export function WorkTile({
 			<View
 				className={cn(
 					"flex-row gap-2.5 items-center justify-between flex-1 border-b border-b-border pb-4 pr-4",
-					{ "border-b-0": isLast },
+					{ "border-b-0 pb-0": isLast },
 				)}
 			>
 				<Text className="text-base text-foreground">{title}</Text>

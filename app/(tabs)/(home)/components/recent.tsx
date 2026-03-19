@@ -1,17 +1,15 @@
-import { AppButton } from "@/components/ui/app-button";
 import { Surface } from "heroui-native";
 import { Text, View } from "react-native";
 import { SectionHeader } from "./section-header";
 
-export function Favorites() {
+export function Recent() {
 	return (
 		<View className="gap-2">
-			<SectionHeader title="Favorites" />
+			<SectionHeader title="Recent" showMenuButton={false} />
 			<Surface className="rounded-[10px] px-4 gap-2 py-4 shadow-none">
 				<Text className="text-center text-[17px] leading-tight">
-					Add favorite repositories here to have quick access at any time, without having to search
+					Issues and Pull Requests that you&apos;ve interacted with recently will appear here
 				</Text>
-				<AppButton variant="outline">Add Favorites</AppButton>
 			</Surface>
 		</View>
 	);
