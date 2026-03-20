@@ -4,7 +4,7 @@ import { useThemeColor } from "heroui-native";
 import React, { ReactNode } from "react";
 import { Pressable, ScrollView, View } from "react-native";
 
-type AnimatedHeaderScreenProps = {
+type MainHeaderScreenProps = {
 	children: ReactNode;
 	title?: string;
 	onSearch?: (text: string) => void;
@@ -18,16 +18,15 @@ type AnimatedHeaderScreenProps = {
 	};
 };
 
-export default function AnimatedHeaderScreen({
+export default function MainHeaderScreen({
 	title,
 	children,
 	onSearch,
 	leftIcon,
 	rightIcon,
-}: AnimatedHeaderScreenProps) {
+}: MainHeaderScreenProps) {
 	const accent = useThemeColor("accent");
 	const foreground = useThemeColor("foreground");
-	const muted = useThemeColor("muted");
 
 	return (
 		<>
@@ -38,7 +37,6 @@ export default function AnimatedHeaderScreen({
 						placeholder: "Search GitHub",
 						tintColor: accent,
 						textColor: foreground,
-						headerIconColor: muted,
 						hideWhenScrolling: true,
 						onChangeText: (e) => onSearch?.(e.nativeEvent.text),
 					},

@@ -40,7 +40,7 @@
 			--surface-foreground: var(--foreground);
 
 			--surface-secondary: oklch(0.9524 0.0013 286.37);
-			--surface-secondary-foreground: var(--foreground);
+			--surface-secondary-foreground: #575a6c;
 
 			--surface-tertiary: #e0e1e7;
 			--surface-tertiary-foreground: var(--foreground);
@@ -49,7 +49,7 @@
 			--overlay: var(--white);
 			--overlay-foreground: var(--foreground);
 
-			--muted: #656d76;
+			--muted: #9295a0;
 
 			--default: oklch(94% 0.001 286.375);
 			--default-foreground: var(--eclipse);

@@ -1,4 +1,4 @@
-import AnimatedHeaderScreen from "@/components/animated-header-screen";
+import MainHeaderScreen from "@/components/main-header-screen";
 import { View } from "react-native";
 import { Favorites } from "./components/favorites";
 import { MyWork } from "./components/my-work";
@@ -7,7 +7,7 @@ import { Shortcuts } from "./components/shortcuts";
 
 export default function HomeScreen() {
 	return (
-		<AnimatedHeaderScreen
+		<MainHeaderScreen
 			title="Home"
 			rightIcon={{
 				name: "plus",
@@ -20,6 +20,6 @@ export default function HomeScreen() {
 				<Shortcuts />
 				<Recent />
 			</View>
-		</AnimatedHeaderScreen>
+		</MainHeaderScreen>
 	);
 }

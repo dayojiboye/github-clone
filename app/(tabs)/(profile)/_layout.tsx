@@ -1,5 +1,13 @@
 import TabStackLayout from "@/components/tab-stack-layout";
 
 export default function ProfileLayout() {
-	return <TabStackLayout />;
+	return (
+		<TabStackLayout
+			screenOptions={{
+				headerLargeTitle: false,
+				headerBlurEffect: "none",
+				headerLargeTitleShadowVisible: false,
+			}}
+		/>
+	);
 }

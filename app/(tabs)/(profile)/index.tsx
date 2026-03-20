@@ -1,12 +1,85 @@
-import AnimatedHeaderScreen from "@/components/animated-header-screen";
-import { Text, View } from "react-native";
+import { IconSymbol } from "@/components/ui/icon-symbol.ios";
+import { useHeaderHeight } from "@react-navigation/elements";
+import { Image } from "expo-image";
+import { Stack } from "expo-router";
+import { useThemeColor } from "heroui-native";
+import { Pressable, Text, View } from "react-native";
+import Animated, {
+	interpolate,
+	useAnimatedRef,
+	useAnimatedStyle,
+	useScrollViewOffset,
+} from "react-native-reanimated";
+import { withUniwind } from "uniwind";
+import { SetStatus } from "./components/set-status";
+
+const StyledImage = withUniwind(Image);
 
 export default function ProfileScreen() {
+	const ref = useAnimatedRef<Animated.ScrollView>();
+	const scroll = useScrollViewOffset(ref);
+	const accentColor = useThemeColor("accent");
+
+	const headerHeight = useHeaderHeight();
+
+	const headerStyle = useAnimatedStyle(
+		() => ({
+			transform: [
+				{ translateY: interpolate(scroll.value, [0, 100], [headerHeight + 20, 0], "clamp") },
+			],
+		}),
+		[],
+	);
+
 	return (
-		<AnimatedHeaderScreen title="Profile">
-			<View className="flex-1">
-				<Text>Profile Screen</Text>
+		<Animated.ScrollView
+			ref={ref}
+			className="flex-1 bg-[#FBFBFC]"
+			contentContainerClassName="pb-[100px] px-4"
+			contentContainerStyle={{ paddingTop: headerHeight + 20 }}
+		>
+			<Stack.Screen
+				options={{
+					headerStyle: { backgroundColor: "#FBFBFC" },
+					headerBlurEffect: "regular",
+					headerTitle: () => {
+						return (
+							<View style={{ overflow: "hidden", paddingBottom: 9, marginBottom: -9 }}>
+								<Animated.View style={headerStyle}>
+									<Text className="text-lg font-semibold">dayojiboye</Text>
+								</Animated.View>
+							</View>
+						);
+					},
+					headerRight: () => {
+						return (
+							<View className="flex-row gap-x-5">
+								<Pressable>
+									<IconSymbol name="gearshape" color={accentColor} />
+								</Pressable>
+								<Pressable>
+									<IconSymbol name="square.and.arrow.up" color={accentColor} />
+								</Pressable>
+							</View>
+						);
+					},
+				}}
+			/>
+			<View className="flex-row items-center gap-x-4">
+				<StyledImage
+					alt="User avatar"
+					source={require("../../../assets/images/60001148.jpeg")}
+					className="rounded-full size-18 border border-border"
+				/>
+				<View>
+					<Text className="font-bold text-[22px] leading-tight">Adedayo Jiboye</Text>
+					<Text className="text-surface-secondary-foreground text-base leading-tight">
+						dayojiboye
+					</Text>
+				</View>
 			</View>
-		</AnimatedHeaderScreen>
+
+			<SetStatus />
+		</Animated.ScrollView>
 	);
 }
