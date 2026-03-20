@@ -14,6 +14,7 @@ import Animated, {
 } from "react-native-reanimated";
 import { withUniwind } from "uniwind";
 import { GithubInfo } from "./components/github-info";
+import { PinnedRepositories } from "./components/pinned-repositories";
 import { ProfileInfo } from "./components/profile-info";
 import { SetStatus } from "./components/set-status";
 
@@ -44,8 +45,8 @@ export default function ProfileScreen() {
 	return (
 		<Animated.ScrollView
 			ref={scrollViewRef}
-			className="flex-1 bg-[#FBFBFC]"
-			contentContainerClassName="pb-[100px]"
+			className="flex-1 bg-background"
+			contentContainerClassName="grow bg-[#FBFBFC]"
 			contentContainerStyle={{ paddingTop: headerHeight + 20 }}
 			scrollToOverflowEnabled
 		>
@@ -53,6 +54,7 @@ export default function ProfileScreen() {
 				options={{
 					headerStyle: { backgroundColor: "#FBFBFC" },
 					headerBlurEffect: "regular",
+					headerShadowVisible: true,
 					headerTitle: () => {
 						return (
 							<View style={{ overflow: "hidden", paddingBottom: 9, marginBottom: -9 }}>
@@ -80,7 +82,7 @@ export default function ProfileScreen() {
 				<StyledImage
 					alt="User avatar"
 					source={require("../../../assets/images/60001148.jpeg")}
-					className="rounded-full size-18 border border-border"
+					className="rounded-full size-18 border border-border shrink-0"
 				/>
 				<View>
 					<Text className="font-bold text-[22px] leading-tight">Adedayo Jiboye</Text>
@@ -95,6 +97,7 @@ export default function ProfileScreen() {
 				<ProfileInfo />
 			</View>
 			<GithubInfo />
+			<PinnedRepositories />
 		</Animated.ScrollView>
 	);
 }

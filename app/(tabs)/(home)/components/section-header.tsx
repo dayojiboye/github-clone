@@ -1,6 +1,6 @@
 import { Octicons } from "@expo/vector-icons";
-import { useThemeColor } from "heroui-native";
 import { Pressable, Text, View } from "react-native";
+import { useCSSVariable } from "uniwind";
 
 interface SectionHeaderProps {
 	title: string;
@@ -8,16 +8,16 @@ interface SectionHeaderProps {
 }
 
 export function SectionHeader({ title, showMenuButton = true }: SectionHeaderProps) {
-	const mutedColor = useThemeColor("muted");
+	const iconColor = useCSSVariable("--color-icon") as string;
 
 	return (
 		<View className="flex-row justify-between gap-3 items-center">
 			<Text className="text-[22px] font-semibold">{title}</Text>
-			{showMenuButton && (
+			{showMenuButton ? (
 				<Pressable>
-					<Octicons name="kebab-horizontal" size={22} color={mutedColor} />
+					<Octicons name="kebab-horizontal" size={22} color={iconColor} />
 				</Pressable>
-			)}
+			) : null}
 		</View>
 	);
 }

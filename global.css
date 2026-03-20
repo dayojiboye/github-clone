@@ -32,7 +32,7 @@
 	:root {
 		@variant light {
 			/* Base Colors */
-			--background: rgb(239, 240, 245);
+			--background: #eff0f4;
 			--foreground: var(--eclipse);
 
 			/* Surface: Used for non-overlay components (cards, accordions, disclosure groups) */
@@ -50,6 +50,7 @@
 			--overlay-foreground: var(--foreground);
 
 			--muted: #60626b;
+			--icon: #9296a2;
 
 			--default: oklch(94% 0.001 286.375);
 			--default-foreground: var(--eclipse);
@@ -115,6 +116,7 @@
 			--overlay-foreground: var(--foreground);
 
 			--muted: oklch(70.5% 0.015 286.067);
+			--icon: #9296a2;
 
 			--default: oklch(27.4% 0.006 286.033);
 			--default-foreground: var(--snow);
@@ -154,4 +156,8 @@
 			--field-shadow: 0 0 0 0 transparent inset; /* Transparent shadow to allow ring utilities to work */
 		}
 	}
+}
+
+@theme inline {
+	--color-icon: var(--icon);
 }
