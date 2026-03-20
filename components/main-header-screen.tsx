@@ -1,20 +1,21 @@
-import { Octicons } from "@expo/vector-icons";
 import { useScrollToTop } from "@react-navigation/native";
 import { Stack } from "expo-router";
+import { SymbolViewProps } from "expo-symbols";
 import { useThemeColor } from "heroui-native";
 import React, { ReactNode, useRef } from "react";
 import { Pressable, ScrollView, View } from "react-native";
+import { IconSymbol } from "./ui/icon-symbol.ios";
 
 type MainHeaderScreenProps = {
 	children: ReactNode;
 	title?: string;
 	onSearch?: (text: string) => void;
 	leftIcon?: {
-		name: keyof typeof Octicons.glyphMap;
+		name: SymbolViewProps["name"];
 		onPress: () => void;
 	};
 	rightIcon?: {
-		name: keyof typeof Octicons.glyphMap;
+		name: SymbolViewProps["name"];
 		onPress: () => void;
 	};
 };
@@ -51,14 +52,14 @@ export default function MainHeaderScreen({
 					headerLeft: leftIcon
 						? () => (
 								<Pressable onPress={leftIcon.onPress}>
-									<Octicons name={leftIcon.name} size={24} color={accent} />
+									<IconSymbol name={leftIcon.name} size={24} color={accent} />
 								</Pressable>
 							)
 						: undefined,
 					headerRight: rightIcon
 						? () => (
 								<Pressable onPress={rightIcon.onPress}>
-									<Octicons name={rightIcon.name} size={24} color={accent} />
+									<IconSymbol name={rightIcon.name} size={24} color={accent} />
 								</Pressable>
 							)
 						: undefined,
