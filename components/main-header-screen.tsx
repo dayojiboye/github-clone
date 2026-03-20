@@ -1,7 +1,8 @@
 import { Octicons } from "@expo/vector-icons";
+import { useScrollToTop } from "@react-navigation/native";
 import { Stack } from "expo-router";
 import { useThemeColor } from "heroui-native";
-import React, { ReactNode } from "react";
+import React, { ReactNode, useRef } from "react";
 import { Pressable, ScrollView, View } from "react-native";
 
 type MainHeaderScreenProps = {
@@ -27,6 +28,13 @@ export default function MainHeaderScreen({
 }: MainHeaderScreenProps) {
 	const accent = useThemeColor("accent");
 	const foreground = useThemeColor("foreground");
+
+	const scrollViewRef = useRef<ScrollView>(null);
+	useScrollToTop(
+		useRef({
+			scrollToTop: () => scrollViewRef.current?.scrollTo({ y: 0, animated: true }),
+		}),
+	);
 
 	return (
 		<>
@@ -58,9 +66,11 @@ export default function MainHeaderScreen({
 			/>
 
 			<ScrollView
+				ref={scrollViewRef}
 				contentInsetAdjustmentBehavior="automatic"
 				className="flex-1 bg-background"
 				contentContainerClassName="pb-[100px] pt-2"
+				scrollToOverflowEnabled
 			>
 				<View className="px-4">{children}</View>
 			</ScrollView>

@@ -1,24 +1,33 @@
 import { IconSymbol } from "@/components/ui/icon-symbol.ios";
 import { useHeaderHeight } from "@react-navigation/elements";
+import { useScrollToTop } from "@react-navigation/native";
 import { Image } from "expo-image";
 import { Stack } from "expo-router";
 import { useThemeColor } from "heroui-native";
+import { useRef } from "react";
 import { Pressable, Text, View } from "react-native";
 import Animated, {
 	interpolate,
 	useAnimatedRef,
 	useAnimatedStyle,
-	useScrollViewOffset,
+	useScrollOffset,
 } from "react-native-reanimated";
 import { withUniwind } from "uniwind";
+import { ProfileInfo } from "./components/profile-info";
 import { SetStatus } from "./components/set-status";
 
 const StyledImage = withUniwind(Image);
 
 export default function ProfileScreen() {
-	const ref = useAnimatedRef<Animated.ScrollView>();
-	const scroll = useScrollViewOffset(ref);
+	const scrollViewRef = useAnimatedRef<Animated.ScrollView>();
+	const scroll = useScrollOffset(scrollViewRef);
 	const accentColor = useThemeColor("accent");
+
+	useScrollToTop(
+		useRef({
+			scrollToTop: () => scrollViewRef.current?.scrollTo({ y: 0, animated: true }),
+		}),
+	);
 
 	const headerHeight = useHeaderHeight();
 
@@ -33,10 +42,11 @@ export default function ProfileScreen() {
 
 	return (
 		<Animated.ScrollView
-			ref={ref}
+			ref={scrollViewRef}
 			className="flex-1 bg-[#FBFBFC]"
-			contentContainerClassName="pb-[100px] px-4"
+			contentContainerClassName="pb-[100px]"
 			contentContainerStyle={{ paddingTop: headerHeight + 20 }}
+			scrollToOverflowEnabled
 		>
 			<Stack.Screen
 				options={{
@@ -65,7 +75,7 @@ export default function ProfileScreen() {
 					},
 				}}
 			/>
-			<View className="flex-row items-center gap-x-4">
+			<View className="flex-row items-center gap-x-4 px-4">
 				<StyledImage
 					alt="User avatar"
 					source={require("../../../assets/images/60001148.jpeg")}
@@ -78,8 +88,11 @@ export default function ProfileScreen() {
 					</Text>
 				</View>
 			</View>
-
-			<SetStatus />
+			<View className="mt-6 px-4 gap-4 pb-8">
+				<SetStatus />
+				<Text className="text-lg">Senior Frontend Engineer</Text>
+				<ProfileInfo />
+			</View>
 		</Animated.ScrollView>
 	);
 }

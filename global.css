@@ -49,7 +49,7 @@
 			--overlay: var(--white);
 			--overlay-foreground: var(--foreground);
 
-			--muted: #9295a0;
+			--muted: #60626b;
 
 			--default: oklch(94% 0.001 286.375);
 			--default-foreground: var(--eclipse);
