@@ -13,6 +13,7 @@ import Animated, {
 	useScrollOffset,
 } from "react-native-reanimated";
 import { withUniwind } from "uniwind";
+import { GithubInfo } from "./components/github-info";
 import { ProfileInfo } from "./components/profile-info";
 import { SetStatus } from "./components/set-status";
 
@@ -90,9 +91,10 @@ export default function ProfileScreen() {
 			</View>
 			<View className="mt-6 px-4 gap-4 pb-8">
 				<SetStatus />
-				<Text className="text-lg">Senior Frontend Engineer</Text>
+				<Text className="text-base">Senior Frontend Engineer</Text>
 				<ProfileInfo />
 			</View>
+			<GithubInfo />
 		</Animated.ScrollView>
 	);
 }

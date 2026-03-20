@@ -11,6 +11,8 @@ export const unstable_settings = {
 	anchor: "(tabs)",
 };
 
+Uniwind.setTheme("light");
+
 export default function RootLayout() {
 	return (
 		<GestureHandlerRootView style={{ flex: 1 }}>

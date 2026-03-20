@@ -11,16 +11,16 @@ export function ProfileInfo() {
 			</View>
 			<View className="w-fit flex-row items-center gap-1.5">
 				<Icon name="linkedin-box-fill" size={20} color={"#9296A2"} />
-				<Text className="text-base font-medium">in/adedayo-jiboye-661632146</Text>
+				<Text className="text-base font-semibold">in/adedayo-jiboye-661632146</Text>
 			</View>
 			<View className="w-fit flex-row items-center gap-1.5">
 				<Octicons name="people" size={17} color={"#9296A2"} />
 				<Text className="text-[#4D5366] text-base">
-					<Text className="text-foreground font-medium">26</Text> followers
+					<Text className="text-foreground font-semibold">26</Text> followers
 				</Text>
 				<View className="size-0.5 rounded-full bg-[#4D5366]" />
 				<Text className="text-[#4D5366] text-base">
-					<Text className="text-foreground font-medium">32</Text> following
+					<Text className="text-foreground font-semibold">32</Text> following
 				</Text>
 			</View>
 		</View>
